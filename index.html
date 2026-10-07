@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>លិខិតអញ្ជើញ / Thư Mời - Rithy Agriculture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Moul&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --gold-dark: #8e6210;
+            --forest-green: #1b4332;
+            --soft-cream: #faf7f2;
+            --card-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Battambang', sans-serif;
+            background: radial-gradient(circle at top, #2d5a3f 0%, #0d2318 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 12px;
+        }
+
+        /* Fixed Top Controls */
+        .controls {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .btn-ctrl {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1b4332;
+            border: 1px solid #bf953f;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-ctrl:hover {
+            background: #bf953f;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Card Container styled closely after the document poster */
+        .invitation-poster {
+            width: 100%;
+            max-width: 580px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            position: relative;
+            border: 5px solid #d4af37;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Banner Image Section */
+        .poster-image-container {
+            width: 100%;
+            position: relative;
+            background: #f4ede0;
+            overflow: hidden;
+            border-bottom: 2px solid #ecd89a;
+        }
+
+        .poster-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Bottom Details & Invitation Body */
+        .content-body {
+            background: linear-gradient(180deg, #fffdf8 0%, #fdf9f0 100%);
+            padding: 28px 24px;
+            text-align: center;
+        }
+
+        .invite-label {
+            font-family: 'Moul', serif;
+            font-size: 24px;
+            color: #a47614;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .guest-input-slot {
+            width: 80%;
+            margin: 0 auto 20px auto;
+            border-bottom: 2px dashed #b8860b;
+            min-height: 28px;
+        }
+
+        .main-message {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #243828;
+            font-weight: 600;
+            margin-bottom: 22px;
+            padding: 0 10px;
+        }
+
+        /* Details Information Box */
+        .info-card {
+            background: #f7f3e8;
+            border-radius: 12px;
+            border-left: 4px solid #1b4332;
+            padding: 16px;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 26px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .info-card p {
+            margin-bottom: 6px;
+        }
+
+        .info-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer Signatures */
+        .signature-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding-top: 10px;
+        }
+
+        .sign-block {
+            text-align: center;
+            font-size: 14px;
+            color: #1b4332;
+            font-weight: 700;
+        }
+
+        .sign-line {
+            width: 140px;
+            height: 1px;
+            background: #888;
+            margin: 45px auto 6px auto;
+        }
+
+        .sign-hint {
+            font-size: 12px;
+            font-weight: normal;
+            color: #666;
+        }
+
+        /* Multi-language switch visibility */
+        .lang-vn { display: none; }
+        .lang-kh { display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- Language & Audio Controls -->
+    <div class="controls">
+        <button class="btn-ctrl" id="lang-btn" onclick="toggleLanguage()">🌐 Tiếng Việt</button>
+        <button class="btn-ctrl" id="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-audio" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=traditional-asian-melody-112959.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="invitation-poster">
+        <!-- Document Graphic Banner -->
+        <div class="poster-image-container">
+            <!-- Ensure poster_image.png is placed in the same folder as this HTML file -->
+            <img src="poster_image.png" alt="Rithy Rubber Invitation Poster" class="poster-img" onerror="this.src='https://placehold.co/600x750/1b4332/fcf6ba?text=Rithy+Agriculture+Poster'">
+        </div>
+
+        <div class="content-body">
+            <!-- Invitation Title -->
+            <div class="invite-label lang-kh">សូមគោរពអញ្ជើញ</div>
+            <div class="invite-label lang-vn" style="font-family:'Montserrat', sans-serif; font-weight:700;">TRÂN TRỌNG KÍNH MỜI</div>
+
+            <!-- Blank Guest Slot -->
+            <div class="guest-input-slot"></div>
+
+            <!-- Main Invitation Message -->
+            <div class="main-message lang-kh">
+                ជាភ្ញៀវកិត្តិយសក្នុងកម្មវិធីប្រកួត បាតដៃកមាសប្រមូលផលកៅស៊ូ លើកទី០២ ឆ្នាំ២០២៦ និង ពិសារអាហារសាមគ្គីថ្ងៃត្រង់
+            </div>
+            <div class="main-message lang-vn">
+                Đến tham dự với tư cách khách mời danh dự trong chương trình "Cuộc thi Bàn tay vàng cạo mủ cao su lần thứ 02 năm 2026" và dùng bữa cơm thân mật buổi trưa.
+            </div>
+
+            <!-- Details: Location & Contact -->
+            <div class="info-card lang-kh">
+                <p>📍 <strong>ផ្លូវមក ចូលការដ្ឋាន៖</strong><a href="https://maps.app.goo.gl/LCcSRbFrkbHKQXK49"> ១០ធ្នូ ពីផ្លូវជាតិ ៦</a></p>
+                <p>📞 <strong>លេខខាង ការដ្ឋាន៖</strong> (វណ្ណា) 071 620 3993, (វើន) 077 994 479</p>
+                <p>☎️ <strong>លេខខាងការិយាល័យ៖</strong> 097 229 3958</p>
+            </div>
+            <div class="info-card lang-vn">
+                <p>📍 <strong>Đường vào nông trường:</strong><a href="https://maps.app.goo.gl/LCcSRbFrkbHKQXK49"> Ngày 10 tháng 12 từ Quốc lộ 6</a></p>
+                <p>📞 <strong>Số điện thoại tại nông trường:</strong> [Vanna] 071 620 3993, [Voeun] 077 994 479</p>
+                <p>☎️ <strong>Số điện thoại văn phòng:</strong> 097 229 3958</p>
+            </div>
+
+            <!-- Signatures Section -->
+            <div class="signature-section">
+                <div class="sign-block lang-kh">
+                    <div>នាយិកាប្រតិបត្តិនាយកដ្ឋាន / នាយិកាប្រតិបត្តិការដ្ឋាន</div>
+                    <div class="sign-line"></div>
+                    <span class="sign-hint">(ហត្ថលេខា)</span>
+                </div>
+                <div class="sign-block lang-vn">
+                    <div>Giám đốc điều hành nông trường</div>
+                    <div class="sign-line"></div>
+                    <span class="sign-hint">(Chữ ký)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'kh';
+        let isPlaying = false;
+        const audio = document.getElementById('bg-audio');
+
+        function toggleLanguage() {
+            const khBlocks = document.querySelectorAll('.lang-kh');
+            const vnBlocks = document.querySelectorAll('.lang-vn');
+            const langBtn = document.getElementById('lang-btn');
+
+            if (currentLang === 'kh') {
+                khBlocks.forEach(el => el.style.display = 'none');
+                vnBlocks.forEach(el => el.style.display = 'block');
+                langBtn.innerText = '🌐 ភាសាខ្មែរ';
+                currentLang = 'vn';
+            } else {
+                khBlocks.forEach(el => el.style.display = 'block');
+                vnBlocks.forEach(el => el.style.display = 'none');
+                langBtn.innerText = '🌐 Tiếng Việt';
+                currentLang = 'kh';
+            }
+        }
+
+        function toggleMusic() {
+            const musicBtn = document.getElementById('music-btn');
+            if (isPlaying) {
+                audio.pause();
+                musicBtn.innerText = '🎵 Play Music';
+            } else {
+                audio.play().catch(e => console.log('Audio autoplay prevented:', e));
+                musicBtn.innerText = '⏸ Pause Music';
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
+</body>
+</html>
