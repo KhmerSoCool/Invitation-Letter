@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Moul&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --primary-gold: #cfa858;
             --gold-dark: #8e6210;
             --forest-green: #1b4332;
             --soft-cream: #faf7f2;
@@ -32,7 +32,7 @@
             padding: 24px 12px;
         }
 
-        /* Fixed Top Controls */
+        /* Top Controls */
         .controls {
             position: fixed;
             top: 16px;
@@ -43,7 +43,7 @@
         }
 
         .btn-ctrl {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             color: #1b4332;
             border: 1px solid #bf953f;
             padding: 8px 16px;
@@ -62,7 +62,7 @@
             transform: translateY(-2px);
         }
 
-        /* Card Container styled closely after the document poster */
+        /* Invitation Card */
         .invitation-poster {
             width: 100%;
             max-width: 580px;
@@ -76,12 +76,11 @@
             flex-direction: column;
         }
 
-        /* Top Banner Image Section */
+        /* Poster Image Container */
         .poster-image-container {
             width: 100%;
             position: relative;
             background: #f4ede0;
-            overflow: hidden;
             border-bottom: 2px solid #ecd89a;
         }
 
@@ -92,7 +91,7 @@
             object-fit: cover;
         }
 
-        /* Bottom Details & Invitation Body */
+        /* Content Body */
         .content-body {
             background: linear-gradient(180deg, #fffdf8 0%, #fdf9f0 100%);
             padding: 28px 24px;
@@ -108,11 +107,32 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
-        .guest-input-slot {
-            width: 80%;
-            margin: 0 auto 20px auto;
-            border-bottom: 2px dashed #b8860b;
-            min-height: 28px;
+        /* Dynamic Guest Slot */
+        .guest-box {
+            width: 85%;
+            margin: 10px auto 20px auto;
+            padding: 10px 15px;
+            background: #fff8e7;
+            border: 2px dashed #b8860b;
+            border-radius: 10px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .guest-name {
+            font-family: 'Battambang', 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1b4332;
+            letter-spacing: 0.5px;
+        }
+
+        .guest-role {
+            font-size: 13px;
+            color: #666;
+            margin-top: 3px;
         }
 
         .main-message {
@@ -124,7 +144,7 @@
             padding: 0 10px;
         }
 
-        /* Details Information Box */
+        /* Location / Contact Card */
         .info-card {
             background: #f7f3e8;
             border-radius: 12px;
@@ -146,7 +166,7 @@
             margin-bottom: 0;
         }
 
-        /* Footer Signatures */
+        /* Signatures */
         .signature-section {
             display: flex;
             justify-content: space-around;
@@ -174,7 +194,7 @@
             color: #666;
         }
 
-        /* Multi-language switch visibility */
+        /* Language Toggle Rules */
         .lang-vn { display: none; }
         .lang-kh { display: block; }
     </style>
@@ -193,9 +213,8 @@
     </audio>
 
     <div class="invitation-poster">
-        <!-- Document Graphic Banner -->
+        <!-- Poster Graphic Banner -->
         <div class="poster-image-container">
-            <!-- Ensure poster_image.png is placed in the same folder as this HTML file -->
             <img src="poster_image.png" alt="Rithy Rubber Invitation Poster" class="poster-img" onerror="this.src='https://placehold.co/600x750/1b4332/fcf6ba?text=Rithy+Agriculture+Poster'">
         </div>
 
@@ -204,40 +223,45 @@
             <div class="invite-label lang-kh">សូមគោរពអញ្ជើញ</div>
             <div class="invite-label lang-vn" style="font-family:'Montserrat', sans-serif; font-weight:700;">TRÂN TRỌNG KÍNH MỜI</div>
 
-            <!-- Blank Guest Slot -->
-            <div class="guest-input-slot"></div>
+            <!-- Dynamic Guest Slot (Populated from Google Sheet or URL) -->
+            <div class="guest-box">
+                <div>
+                    <div class="guest-name" id="guest-display">សូមស្វាគមន៍ភ្ញៀវកិត្តិយស</div>
+                    <div class="guest-role" id="role-display"></div>
+                </div>
+            </div>
 
             <!-- Main Invitation Message -->
             <div class="main-message lang-kh">
-                ជាភ្ញៀវកិត្តិយសក្នុងកម្មវិធីប្រកួត បាតដៃកមាសប្រមូលផលកៅស៊ូ លើកទី០២ ឆ្នាំ២០២៦ និង ពិសារអាហារសាមគ្គីថ្ងៃត្រង់
+                ជាភ្ញៀវកិត្តិយសក្នុងកម្មវិធីប្រកួត បាតដៃកមាសប្រមូលផលកៅស៊ូ លើកទី០២ ឆ្នាំ២០២៦ និង ពិសារអាហារសាមគ្គីថ្ងៃត្រង់[cite: 1]
             </div>
             <div class="main-message lang-vn">
-                Đến tham dự với tư cách khách mời danh dự trong chương trình "Cuộc thi Bàn tay vàng cạo mủ cao su lần thứ 02 năm 2026" và dùng bữa cơm thân mật buổi trưa.
+                Đến tham dự với tư cách khách mời danh dự trong chương trình "Cuộc thi Bàn tay vàng cạo mủ cao su lần thứ 02 năm 2026" và dùng bữa cơm thân mật buổi trưa.[cite: 1]
             </div>
 
             <!-- Details: Location & Contact -->
             <div class="info-card lang-kh">
-                <p>📍 <strong>ផ្លូវមក ចូលការដ្ឋាន៖</strong><a href="https://maps.app.goo.gl/LCcSRbFrkbHKQXK49"> ១០ធ្នូ ពីផ្លូវជាតិ ៦</a></p>
-                <p>📞 <strong>លេខខាង ការដ្ឋាន៖</strong> (វណ្ណា) 071 620 3993, (វើន) 077 994 479</p>
-                <p>☎️ <strong>លេខខាងការិយាល័យ៖</strong> 097 229 3958</p>
+                <p>📍 <strong>ផ្លូវមក ចូលការដ្ឋាន៖</strong> ១០ធ្នូ ពីផ្លូវជាតិ ៦[cite: 1]</p>
+                <p>📞 <strong>លេខខាង ការដ្ឋាន៖</strong> (វណ្ណា) 071 620 3993, (វើន) 077 994 479[cite: 1]</p>
+                <p>☎️ <strong>លេខខាងការិយាល័យ៖</strong> 097 229 3958[cite: 1]</p>
             </div>
             <div class="info-card lang-vn">
-                <p>📍 <strong>Đường vào nông trường:</strong><a href="https://maps.app.goo.gl/LCcSRbFrkbHKQXK49"> Ngày 10 tháng 12 từ Quốc lộ 6</a></p>
-                <p>📞 <strong>Số điện thoại tại nông trường:</strong> [Vanna] 071 620 3993, [Voeun] 077 994 479</p>
-                <p>☎️ <strong>Số điện thoại văn phòng:</strong> 097 229 3958</p>
+                <p>📍 <strong>Đường vào nông trường:</strong> Ngày 10 tháng 12 từ Quốc lộ 6[cite: 1]</p>
+                <p>📞 <strong>Số điện thoại tại nông trường:</strong> [Vanna] 071 620 3993, [Voeun] 077 994 479)[cite: 1]</p>
+                <p>☎️ <strong>Số điện thoại văn phòng:</strong> 097 229 3958[cite: 1]</p>
             </div>
 
             <!-- Signatures Section -->
             <div class="signature-section">
                 <div class="sign-block lang-kh">
-                    <div>នាយិកាប្រតិបត្តិនាយកដ្ឋាន / នាយិកាប្រតិបត្តិការដ្ឋាន</div>
+                    <div>នាយិកាប្រតិបត្តិនាយកដ្ឋាន / នាយិកាប្រតិបត្តិការដ្ឋាន[cite: 1]</div>
                     <div class="sign-line"></div>
-                    <span class="sign-hint">(ហត្ថលេខា)</span>
+                    <span class="sign-hint">(ហត្ថលេខា)[cite: 1]</span>
                 </div>
                 <div class="sign-block lang-vn">
-                    <div>Giám đốc điều hành nông trường</div>
+                    <div>Giám đốc điều hành nông trường[cite: 1]</div>
                     <div class="sign-line"></div>
-                    <span class="sign-hint">(Chữ ký)</span>
+                    <span class="sign-hint">(Chữ ký)[cite: 1]</span>
                 </div>
             </div>
         </div>
@@ -246,7 +270,57 @@
     <script>
         let currentLang = 'kh';
         let isPlaying = false;
+        let currentGuestData = { nameKh: '', nameVn: '', role: '' };
+
         const audio = document.getElementById('bg-audio');
+        const guestDisplay = document.getElementById('guest-display');
+        const roleDisplay = document.getElementById('role-display');
+
+        // Optional: Replace this with your Google Sheet published CSV link:
+        // File -> Share -> Publish to web -> select 'Entire Document' and 'Comma-separated values (.csv)'
+        const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRK_mQc_zbDC75FWqPIkbRReDkIX1ikfBfeQOXAVyNrxkAqcrMZ8aski0hMPzjpm3zFf25YE4IfUdOU/pub?gid=0&single=true&output=csv"; 
+
+        // Read query parameters (?name=... or ?id=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const nameParam = urlParams.get('name');
+        const idParam = urlParams.get('id');
+
+        async function initGuest() {
+            if (nameParam) {
+                currentGuestData.nameKh = nameParam;
+                currentGuestData.nameVn = nameParam;
+                renderGuest();
+                return;
+            }
+
+            if (GOOGLE_SHEET_CSV_URL && idParam) {
+                try {
+                    const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                    const text = await response.text();
+                    const rows = text.split('\n').map(r => r.split(','));
+                    
+                    // Match Guest ID (Column 0)
+                    const guest = rows.find(r => r[0] && r[0].trim().toLowerCase() === idParam.trim().toLowerCase());
+                    if (guest) {
+                        currentGuestData.nameKh = guest[1] ? guest[1].trim() : '';
+                        currentGuestData.nameVn = guest[2] ? guest[2].trim() : '';
+                        currentGuestData.role = guest[3] ? guest[3].trim() : '';
+                        renderGuest();
+                    }
+                } catch (e) {
+                    console.warn("Could not load from Google Sheets CSV:", e);
+                }
+            }
+        }
+
+        function renderGuest() {
+            if (currentLang === 'kh') {
+                guestDisplay.innerText = currentGuestData.nameKh || "សូមស្វាគមន៍ភ្ញៀវកិត្តិយស";
+            } else {
+                guestDisplay.innerText = currentGuestData.nameVn || "Kính mời Quý khách";
+            }
+            roleDisplay.innerText = currentGuestData.role || "";
+        }
 
         function toggleLanguage() {
             const khBlocks = document.querySelectorAll('.lang-kh');
@@ -264,6 +338,7 @@
                 langBtn.innerText = '🌐 Tiếng Việt';
                 currentLang = 'kh';
             }
+            renderGuest();
         }
 
         function toggleMusic() {
@@ -272,11 +347,14 @@
                 audio.pause();
                 musicBtn.innerText = '🎵 Play Music';
             } else {
-                audio.play().catch(e => console.log('Audio autoplay prevented:', e));
+                audio.play().catch(e => console.log('Autoplay prevented:', e));
                 musicBtn.innerText = '⏸ Pause Music';
             }
             isPlaying = !isPlaying;
         }
+
+        // Initialize guest detection
+        initGuest();
     </script>
 </body>
 </html>
